@@ -70,8 +70,8 @@ func (s *Client) doRequest(req *http.Request) ([]byte, error) {
 	return body, nil
 }
 
-func (s *Client) GetUserOrg(id int) (*userOrg, error) {
-	url := fmt.Sprintf(s.BaseURL+"/accounts/", s.Username, id)
+func (s *Client) GetUserOrg(id int, whom string) (*userOrg, error) {
+	url := fmt.Sprintf(s.BaseURL+"/accounts/"+whom, s.Username, id)
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return nil, err
