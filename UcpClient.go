@@ -14,13 +14,13 @@ type Client struct {
 
 type userOrg struct {
   
-  fullName: string,
-  id: string,
-  isActive: true,
-  isAdmin: true,
-  isImported: true,
-  isOrg: true,
-  membersCount: 0,
+  fullName: string
+  id: string
+  isActive: true
+  isAdmin: true
+  isImported: true
+  isOrg: true
+  membersCount: 0
   name: string
 
 }
