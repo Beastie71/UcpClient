@@ -5,7 +5,7 @@ import (
 )
 
 type Client struct {
-    BaseURL 		*url.URL
+    BaseURL 		string
     Username		string
     Password		string
  
@@ -25,8 +25,9 @@ type userOrg struct {
 
 }
 
-func NewBasicAuthClient(username, password string) *Client {
+func NewBasicAuthClient(baseurl, username, password string) *Client {
 	return &Client{
+		BaseURL:  baseurl,
 		Username: username,
 		Password: password,
 	}
@@ -65,4 +66,20 @@ func (s *Client) doRequest(req *http.Request) ([]byte, error) {
 	return body, nil
 }
 
-
+func (s *Client) GetUserOrg(id int) (*userOrgInst, error) {
+	url := fmt.Sprintf(baseURL+"/accounts/", s.Username, id)
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		return nil, err
+	}
+	bytes, err := s.doRequest(req)
+	if err != nil {
+		return nil, err
+	}
+	var data userOrg
+	err = json.Unmarshal(bytes, &data)
+	if err != nil {
+		return nil, err
+	}
+	return &data, nil
+}
