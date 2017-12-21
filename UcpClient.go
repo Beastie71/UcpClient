@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net/http"
 	"encoding/json"
+	"bytes"
+	"io/ioutil"
 )
 
 type Client struct {
@@ -36,9 +38,9 @@ func NewBasicAuthClient(baseurl, username, password string) *Client {
 }
 
 func (s *Client) AddUserOrg(UserOrgInst userOrg) error {
-	url := fmt.Sprintf(baseURL+"/accounts/", s.Username)
+	url := fmt.Sprintf(s.BaseURL+"/accounts/", s.Username)
 	fmt.Println(url)
-	j, err := json.Marshal(todo)
+	j, err := json.Marshal(UserOrgInst)
 	if err != nil {
 		return err
 	}
@@ -68,8 +70,8 @@ func (s *Client) doRequest(req *http.Request) ([]byte, error) {
 	return body, nil
 }
 
-func (s *Client) GetUserOrg(id int) (*userOrgInst, error) {
-	url := fmt.Sprintf(baseURL+"/accounts/", s.Username, id)
+func (s *Client) GetUserOrg(id int) (userOrg *userOrgInst, error) {
+	url := fmt.Sprintf(s.BaseURL+"/accounts/", s.Username, id)
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return nil, err
