@@ -16,11 +16,11 @@ type userOrg struct {
   
   fullName string
   id string
-  isActive true
-  isAdmin true
-  isImported true
-  isOrg true
-  membersCount 0
+  isActive boolean
+  isAdmin boolean
+  isImported boolean
+  isOrg boolean
+  membersCount int
   name string
 
 }
