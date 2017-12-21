@@ -9,7 +9,7 @@ type Client struct {
     Username		string
     Password		string
  
-    httpClient *http.Client
+//    httpClient *http.Client
 }
 
 type userOrg struct {
