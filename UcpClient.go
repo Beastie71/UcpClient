@@ -1,7 +1,9 @@
 package UcpClient
 
 import (
-
+	"fmt"
+	"net/http"
+	"encoding/json"
 )
 
 type Client struct {
@@ -33,7 +35,7 @@ func NewBasicAuthClient(baseurl, username, password string) *Client {
 	}
 }
 
-func (s *Client) AddUserOrg(userOrg *UserOrgInst) error {
+func (s *Client) AddUserOrg(UserOrgInst userOrg) error {
 	url := fmt.Sprintf(baseURL+"/accounts/", s.Username)
 	fmt.Println(url)
 	j, err := json.Marshal(todo)
